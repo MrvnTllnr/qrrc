@@ -1,23 +1,18 @@
 package qrrc.view;
 
-import java.awt.Component;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import net.miginfocom.swing.MigLayout;
 import qrrc.controller.BtnListener;
-
-import javax.swing.JLabel;
 
 public class Window{
 
@@ -97,5 +92,12 @@ public class Window{
 		label.setIcon(new ImageIcon(bi));
 	}
 	
+	public int getLabelWidth() {
+		return label.getWidth();
+	}
+	
+	public int getLabelHeigth() {
+		return label.getHeight();
+	}
 
 }

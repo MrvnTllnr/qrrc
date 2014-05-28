@@ -1,8 +1,8 @@
 package qrrc.controller;
 
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.BitSet;
@@ -13,8 +13,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 
 import org.opencv.core.Mat;
-import org.opencv.core.MatOfByte;
-import org.opencv.highgui.Highgui;
 
 import qrrc.model.QrData;
 import qrrc.view.Window;
@@ -50,6 +48,17 @@ public class QRController implements Observer  {
 		JFileChooser fc = new JFileChooser(new File("."));
 		if (fc.showOpenDialog(win.getFrame()) == JFileChooser.APPROVE_OPTION) {
 			File f = fc.getSelectedFile();
+			try {
+				InputStream in = new FileInputStream(f);
+				BufferedImage img = ImageIO.read(in);
+				if (img.getWidth() > 250
+						&& img.getHeight() > 250) {
+					img = InputOutputConverter.resize(img,250,250);
+				}
+				win.setQRImage(img);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -58,17 +67,15 @@ public class QRController implements Observer  {
 		File f = new File("");
 		if (fc.showOpenDialog(win.getFrame()) == JFileChooser.APPROVE_OPTION) {
 			f = fc.getSelectedFile();
-			System.out.println(f);
 			BitSet bitSet = InputOutputConverter.pathToBitSet(f.toPath(), false);
 			QrData qrd = new QrData(bitSet);
 			Mat qrMat = qrd.toQrMat(1, true);
-			
-			MatOfByte bytemat = new MatOfByte();
-			Highgui.imencode(".jpg", qrMat, bytemat);
-			byte[] bytes = bytemat.toArray();
-			InputStream in = new ByteArrayInputStream(bytes);
 			try {
-				BufferedImage img = ImageIO.read(in);
+				BufferedImage img = InputOutputConverter.matToBufferedImage(qrMat);
+				if (img.getWidth() > 250
+						&& img.getHeight() > 250) {
+					img = InputOutputConverter.resize(img,250,250);
+				}
 				win.setQRImage(img);
 			} catch (IOException e) {
 				e.printStackTrace();

@@ -85,18 +85,19 @@ public class QrData {
 	}
 
 	private void drawCorners(Mat img, int ps) {
-		//tl
 		drawRect(img,new Rect(0,0,ps*8-1,ps*8-1), new Scalar(255,255,255));
+		drawRect(img,new Rect(img.cols()-ps*8,0,ps*8-1,ps*8-1), new Scalar(255,255,255));
+		drawRect(img,new Rect(0,img.rows()-ps*8,ps*8-1,ps*8-1), new Scalar(255,255,255));
+		
+		//tl
 		drawRect(img,new Rect(0,0,ps*7-1,ps*7-1), new Scalar(0,0,0));
 		drawRect(img,new Rect(ps,ps,ps*5-1,ps*5-1), new Scalar(255,255,255));
 		drawRect(img,new Rect(ps*2,ps*2,ps*3-1,ps*3-1), new Scalar(0,0,0));
 		//tr
-		drawRect(img,new Rect(img.cols()-ps*8,0,ps*8-1,ps*8-1), new Scalar(255,255,255));
 		drawRect(img,new Rect(img.cols()-ps*7,0,ps*7-1,ps*7-1), new Scalar(0,0,0));
 		drawRect(img,new Rect(img.cols()-ps*6,ps,ps*5-1,ps*5-1), new Scalar(255,255,255));
 		drawRect(img,new Rect(img.cols()-ps*5,ps*2,ps*3-1,ps*3-1), new Scalar(0,0,0));
 		//bl
-		drawRect(img,new Rect(0,img.rows()-ps*8,ps*8-1,ps*8-1), new Scalar(255,255,255));
 		drawRect(img,new Rect(0,img.rows()-ps*7,ps*7-1,ps*7-1), new Scalar(0,0,0));
 		drawRect(img,new Rect(ps,img.rows()-ps*6,ps*5-1,ps*5-1), new Scalar(255,255,255));
 		drawRect(img,new Rect(ps*2,img.rows()-ps*5,ps*3-1,ps*3-1), new Scalar(0,0,0));

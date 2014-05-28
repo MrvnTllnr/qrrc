@@ -1,5 +1,8 @@
 package qrrc.controller;
 
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -15,6 +18,12 @@ import java.nio.file.Path;
 import java.util.BitSet;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
+
+import javax.imageio.ImageIO;
+
+import org.opencv.core.Mat;
+import org.opencv.core.MatOfByte;
+import org.opencv.highgui.Highgui;
 
 public class InputOutputConverter {
 	
@@ -99,6 +108,23 @@ public class InputOutputConverter {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	public static BufferedImage resize(BufferedImage image, int width, int height) {
+	    BufferedImage bi = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
+	    Graphics2D g2d = (Graphics2D) bi.createGraphics();
+	    g2d.addRenderingHints(new RenderingHints(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY));
+	    g2d.drawImage(image, 0, 0, width, height, null);
+	    g2d.dispose();
+	    return bi;
+	}
+	
+	public static BufferedImage matToBufferedImage(Mat mat) throws IOException {
+		MatOfByte bytemat = new MatOfByte();
+		Highgui.imencode(".jpg", mat, bytemat);
+		byte[] bytes = bytemat.toArray();
+		InputStream in = new ByteArrayInputStream(bytes);
+		return ImageIO.read(in);
 	}
 	
 	public static void inputByteAnalysis(byte[] fileBytes, boolean debug) {

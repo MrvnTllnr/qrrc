@@ -10,7 +10,6 @@ import org.opencv.core.Mat;
 import org.opencv.core.Point;
 import org.opencv.core.Rect;
 import org.opencv.core.Scalar;
-import org.opencv.core.Size;
 import org.opencv.highgui.Highgui;
 import org.opencv.imgproc.Imgproc;
 
@@ -31,7 +30,7 @@ public class QRDetector {
 	}
 	
 	public void process() {
-		boolean edgeDetection = true;
+		boolean edgeDetection = false;
 		
 		ArrayList<Rect> threeRects = detectCorners();
 		
