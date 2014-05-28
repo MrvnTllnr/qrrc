@@ -70,7 +70,7 @@ public class QRDetector {
 			for (Rect r : result) {
 				Core.rectangle(dbg, r.tl(),r.br(), new Scalar(0, 255, 0));
 			}
-			Highgui.imwrite("qrCorners.bmp", dbg);
+			Highgui.imwrite("debug/qrCorners.bmp", dbg);
 			System.out.println("Debug image 'qrCorners.bmp' drawn!");
 		}
 		return result;
@@ -105,7 +105,7 @@ public class QRDetector {
 
 	    }
 	    
-		Highgui.imwrite("edge.bmp",cdst);
+		Highgui.imwrite("debug/edge.bmp",cdst);
 		System.out.println("Image 'edge.bmp' printed");
 	}
 	
@@ -132,7 +132,7 @@ public class QRDetector {
 		}
 		
 		if (drawQrRects) {
-			Highgui.imwrite("qrRects.bmp", dbg);
+			Highgui.imwrite("debug/qrRects.bmp", dbg);
 			System.out.println("Debug image 'qrRects.bmp' drawn!");
 		}
 		return result;
@@ -163,7 +163,7 @@ public class QRDetector {
 		}
 		
 		if (drawQrMat) { 
-			Highgui.imwrite("qrMat.bmp", result);
+			Highgui.imwrite("debug/qrMat.bmp", result);
 			System.out.println("Image drawn: qrMat.bmp");
 		}
 		return result;
@@ -175,7 +175,7 @@ public class QRDetector {
 		Rect roi = new Rect(new Point(rects.get(0).x,rects.get(0).y)
 						, new Point(rects.get(1).x+rects.get(1).width,rects.get(2).y+rects.get(2).height));
 		
-		if (drawQrImg) Highgui.imwrite("qrImg.bmp", img.submat(roi));
+		if (drawQrImg) Highgui.imwrite("debug/qrImg.bmp", img.submat(roi));
 		return img.submat(roi);
 	}
 	

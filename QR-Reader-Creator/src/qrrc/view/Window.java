@@ -93,7 +93,7 @@ public class Window{
 		return frame;
 	}
 	
-	public void setPanel(BufferedImage bi) {
+	public void setQRImage(BufferedImage bi) {
 		label.setIcon(new ImageIcon(bi));
 	}
 	

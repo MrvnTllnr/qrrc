@@ -55,7 +55,7 @@ public class QrData {
 		drawData(result, pixelSize);
 		
 		if (drawMat) {
-			Highgui.imwrite("toQrMat.png",result);
+			Highgui.imwrite("debug/toQrMat.png",result);
 			System.out.println("Image drawn: toQrMat.bmp");
 		}
 		return result;

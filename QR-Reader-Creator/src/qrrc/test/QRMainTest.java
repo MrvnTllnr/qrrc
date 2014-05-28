@@ -8,7 +8,6 @@ import org.opencv.core.Mat;
 import org.opencv.highgui.Highgui;
 
 import qrrc.controller.InputOutputConverter;
-import qrrc.model.QRDetector;
 import qrrc.model.QrData;
 
 public class QRMainTest {
@@ -24,6 +23,6 @@ public class QRMainTest {
 		BitSet data = InputOutputConverter.pathToBitSet(pathText, false);
 		QrData qrData = new QrData(data);
 		Mat qrDataMat = qrData.toQrMat(1, true);
-		Highgui.imwrite("output/data.bmp",qrDataMat);
+		Highgui.imwrite("output/data.png",qrDataMat);
 	}
 }

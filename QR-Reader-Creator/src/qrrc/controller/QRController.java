@@ -63,22 +63,16 @@ public class QRController implements Observer  {
 			QrData qrd = new QrData(bitSet);
 			Mat qrMat = qrd.toQrMat(1, true);
 			
-			// http://sumitkumariit.blogspot.de/2013/08/coverting-opencv-mat-to-bufferedimage.html
-
 			MatOfByte bytemat = new MatOfByte();
-
 			Highgui.imencode(".jpg", qrMat, bytemat);
-
 			byte[] bytes = bytemat.toArray();
-
 			InputStream in = new ByteArrayInputStream(bytes);
-
 			try {
 				BufferedImage img = ImageIO.read(in);
+				win.setQRImage(img);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
 		}
 	}
 
