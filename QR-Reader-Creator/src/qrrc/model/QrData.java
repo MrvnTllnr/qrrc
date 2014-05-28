@@ -46,8 +46,7 @@ public class QrData {
 		return data;
 	}
 	
-	public Mat toQrMat(int pixelSize) {
-		boolean drawMat = true;
+	public Mat toQrMat(int pixelSize, boolean drawMat) {
 		int size =  (int) Math.ceil(Math.sqrt((((8*8*3)+(data.size())/(32*3)))))*pixelSize;
 		
 		Mat result = new Mat(size,size,CvType.CV_32FC3);

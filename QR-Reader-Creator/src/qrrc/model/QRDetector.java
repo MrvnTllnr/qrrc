@@ -47,7 +47,7 @@ public class QRDetector {
 		
 		QrData qrData = new QrData(qrMat);
 		
-		Mat qrDataMat = qrData.toQrMat(4);
+		Mat qrDataMat = qrData.toQrMat(4, true);
 		
 	}
 	

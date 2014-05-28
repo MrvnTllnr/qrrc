@@ -7,7 +7,7 @@ import java.util.BitSet;
 import org.opencv.core.Mat;
 import org.opencv.highgui.Highgui;
 
-import qrrc.model.InputProcessor;
+import qrrc.controller.InputOutputConverter;
 import qrrc.model.QRDetector;
 import qrrc.model.QrData;
 
@@ -20,16 +20,10 @@ public class QRMainTest {
 		
 		String[] inputText = {"10836_newgrounds_dan_pa.mp3"};
 		Path pathText = Paths.get(p,inputText);
-		InputProcessor ip = new InputProcessor(pathText, false);
 		
-//		String[] inputPic = {"qrcode3.png"};
-//		Path pathPic = Paths.get(p,inputPic);
-//		QRDetector qrd = new QRDetector(pathPic, false);
-//		qrd.process();
-		
-		BitSet data = ip.getFileData();
+		BitSet data = InputOutputConverter.pathToBitSet(pathText, false);
 		QrData qrData = new QrData(data);
-		Mat qrDataMat = qrData.toQrMat(1);
+		Mat qrDataMat = qrData.toQrMat(1, true);
 		Highgui.imwrite("output/data.bmp",qrDataMat);
 	}
 }

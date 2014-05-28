@@ -1,11 +1,15 @@
 package qrrc.controller;
 
 import java.io.File;
+import java.util.BitSet;
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JFileChooser;
 
+import org.opencv.core.Mat;
+
+import qrrc.model.QrData;
 import qrrc.view.Window;
 
 public class QRController implements Observer  {
@@ -44,8 +48,13 @@ public class QRController implements Observer  {
 
 	private void loadFile() {
 		JFileChooser fc = new JFileChooser(new File("."));
+		File f = new File("");
 		if (fc.showOpenDialog(win.getFrame()) == JFileChooser.APPROVE_OPTION) {
-			File f = fc.getSelectedFile();
+			f = fc.getSelectedFile();
+			System.out.println(f);
+			BitSet bitSet = InputOutputConverter.pathToBitSet(f.toPath(), false);
+			QrData qrd = new QrData(bitSet);
+			Mat qrMat = qrd.toQrMat(1, true);
 		}
 	}
 
