@@ -1,10 +1,15 @@
 package qrrc.view;
 
+import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,9 +17,12 @@ import javax.swing.JPanel;
 import net.miginfocom.swing.MigLayout;
 import qrrc.controller.BtnListener;
 
+import javax.swing.JLabel;
+
 public class Window{
 
 	private JFrame frame;
+	JLabel label;
 	
 	private BtnListener al;
 	
@@ -40,6 +48,9 @@ public class Window{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(new MigLayout("", "[10px][89px,grow][][][][][][][][][][][]", "[79px][][][][][][grow]"));
 		
+		label = new JLabel("");
+		frame.getContentPane().add(label, "cell 0 0 12 6");
+		
 		JPanel panel_1 = new JPanel();
 		frame.getContentPane().add(panel_1, "cell 12 0,alignx left,aligny top");
 		GridBagLayout gbl_panel_1 = new GridBagLayout();
@@ -55,7 +66,6 @@ public class Window{
 		gbc_btnLoadFile.insets = new Insets(0, 0, 5, 0);
 		gbc_btnLoadFile.gridx = 0;
 		gbc_btnLoadFile.gridy = 0;
-		btnLoadFile.addActionListener(al);
 		panel_1.add(btnLoadFile, gbc_btnLoadFile);
 		
 		JButton btnSaveImage = new JButton(STR_SAVE_IMAGE);
@@ -64,7 +74,6 @@ public class Window{
 		gbc_btnSaveImage.insets = new Insets(0, 0, 5, 0);
 		gbc_btnSaveImage.gridx = 0;
 		gbc_btnSaveImage.gridy = 1;
-		btnSaveImage.addActionListener(al);
 		panel_1.add(btnSaveImage, gbc_btnSaveImage);
 		
 		JButton btnLoadImage = new JButton(STR_LOAD_IMAGE);
@@ -73,15 +82,19 @@ public class Window{
 		gbc_btnLoadImage.insets = new Insets(0, 0, 5, 0);
 		gbc_btnLoadImage.gridx = 0;
 		gbc_btnLoadImage.gridy = 2;
-		btnLoadImage.addActionListener(al);
 		panel_1.add(btnLoadImage, gbc_btnLoadImage);
 		
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, "cell 0 0 12 7,grow");
+		btnLoadFile.addActionListener(al);
+		btnSaveImage.addActionListener(al);
+		btnLoadImage.addActionListener(al);
 	}
 	
 	public JFrame getFrame() {
 		return frame;
+	}
+	
+	public void setPanel(BufferedImage bi) {
+		label.setIcon(new ImageIcon(bi));
 	}
 	
 
